@@ -31,19 +31,19 @@ public class PositiveTest {
     response = countriesApi.getCountries();
     /* parse the response to JSON array then select random country as JSON object */
     JSONArray countriesJsonArr = new JSONArray(response.asString());
-    Random random = new Random();
-    int countryIndex = random.nextInt(countriesJsonArr.length());
+    int countryIndex = new Random().nextInt(countriesJsonArr.length());
     countryJson = countriesJsonArr.getJSONObject(countryIndex);
   }
 	
   @Test
   public void getCountry() throws Exception {
     
+    String capitalName = countryJson.getString("capital");
     int expectedStatus = 200;
     int firstCapital = 0;
     
     /* get country based on the selected capital name */
-    response = countriesApi.getCountry(countryJson.getString("capital"));
+    response = countriesApi.getCountry(capitalName);
     
     
     /* validate the status code */
@@ -61,7 +61,7 @@ public class PositiveTest {
     }
     
     Assert.assertTrue(responseCountry.length != 0);
-    Assert.assertEquals(responseCountry[firstCapital].capital, countryJson.getString("capital"));
+    Assert.assertEquals(responseCountry[firstCapital].capital, capitalName);
     
     
     /* validate the currency code CountryApi - CapitalApi */

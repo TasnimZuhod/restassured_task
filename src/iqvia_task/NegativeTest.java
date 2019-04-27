@@ -1,6 +1,5 @@
 package iqvia_task;
 
-import org.json.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -44,8 +43,8 @@ public class NegativeTest {
       throw new Exception("Failed to map the Message response", ex);
     }
     
-    Assert.assertEquals(responseMessage.status, response.statusCode());
-    Assert.assertEquals(responseMessage.message, new JSONObject(response.asString()).getString("message"));
+    Assert.assertEquals(responseMessage.status, expectedStatus);
+    Assert.assertEquals(responseMessage.message, "Not Found");
 
   }
   
